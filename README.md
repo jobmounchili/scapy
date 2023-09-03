@@ -26,20 +26,20 @@ Pour déployer notre application, vous allez :
 1. Transférez vos fichiers de code source Django sur le serveur, par exemple, en utilisant SCP, FTP ou Git.
 2. Installer les dépendances requises avec la commande:
 ```
-$ pip3 install -r requirements.txt
+$ sudo pip3 install -r requirements.txt
 ```
 3. Exécuter les migrations de base de données pour configurer la base de données :
 ```
-$ python3 manage.py migrate
+$ sudo python3 manage.py migrate
 ```
 4. Et collecter les fichiers statiques avec la commande:
 ```
-$ python3 manage.py collectstatic
+$ sudo python3 manage.py collectstatic
 ```
 
 ## Exécution de l'application
 ***
 Utiliser un gestionnaire de processus pour exécuter votre application Django avec Gunicorn : 
 ```
-$ gunicorn mysite.wsgi:application
+$ sudo gunicorn mysite.wsgi:application
 ```
