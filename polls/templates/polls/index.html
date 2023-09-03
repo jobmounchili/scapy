@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande capture</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+        <div id="close">
+            <center><p class="notification">{{message}}</p></center>
+        </div>
+        <script>
+            setTimeout(()=>{
+                let doc = document.querySelector("#close")
+                doc.innerHTML = ""
+            },5000)
+        </script>
+        {% endfor %}
+    {% endif %}
+    <!-- <div class="notification"> -->
+    <!-- <center><p class="notification">Demande envoyée✅</p></center> -->
+    <!-- </div> -->
+    <ul>
+        <li><a href="{% url 'index' %}">Demande Capture</a></li>
+        <li><a href="{% url 'fcapture' %}">Liste Demandes</a></li>
+        <li><a href="{% url 'acapture' %}">Liste Captures</a></li>
+    </ul>
+    <div class="container">
+        <center><h1>Demande capture spécifique</h1></center>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form1.as_p }}
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+    <style>
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        form{
+            margin: auto;
+        }
+        h1{
+            margin-top: 75px;
+        }
+        .notification {
+            position: absolute;
+            left: 42%; 
+            background-color: #fff;
+            padding: 15px;
+            /*width: 150px;*/
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+    </style>
+</body>
+</html>

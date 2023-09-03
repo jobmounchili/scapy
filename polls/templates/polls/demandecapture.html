@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Demande capture</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+        <div id="close">
+            <center><p class="notification">{{message}}</p></center>
+        </div>
+        <script>
+            setTimeout(()=>{
+                let doc = document.querySelector("#close")
+                doc.innerHTML = ""
+            },5000)
+        </script>
+        {% endfor %}
+    {% endif %}
+    <ul>
+        <li><a href="{% url 'index' %}">Demande Capture</a></li>
+        <li><a href="{% url 'fcapture' %}">Liste Demandes</a></li>
+        <li><a href="{% url 'acapture' %}">Liste Captures</a></li>
+    </ul>
+    <center><h1>Liste des demandes de capture</h1></center>
+    <div class="container">
+        {% for i in all_cap %}
+        <div class="capture">
+            {% if i.etat == None or i.etat == 1 %}
+            Etat : En attente ...
+            {% elif i.etat == 0 %}
+            Etat : Annulée❌
+            {% elif i.etat == 2 %}
+            Etat : Effectuée✅
+            {% endif %}
+            <p>Nom : {{i.nom_demande}}</p>
+            <p>N° ou nom interface : {{i.interface_reseau}}</p>
+            <p>Nbr de paquet : {{i.Nbr_paquet}}</p>
+            {% if i.Filtre == "" %}
+            <p>Filtre : Aucun </p>
+            {% else %}
+            <p>Filtre : {{i.Filtre}}</p>
+            {% endif %}
+            {% if i.etat == None or i.etat == 1 %}
+            <form action="" method="POST">{% csrf_token %}<button type="submit" name="annule_capture" value="{{i.id_dc}}">Annuler</button>
+            {% endif %}
+            {% if i.etat == None or i.etat == 1 %}
+            <form action="" method="POST">{% csrf_token %}<button type="submit" name="lance_capture" value="{{i.id_dc}}">Lancer la capture</button></form>
+            {% endif %}
+            {% if i.etat == 0 or i.etat == 2 %}
+            <form action="" method="POST">{% csrf_token %}<button type="submit" name="sup_capture" value="{{i.id_dc}}">Supprimer</button></form>
+            {% endif %}
+            <br><br>
+        </div>
+        {% endfor %}
+    </div>
+    <style>
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .capture{
+            margin: 10px;
+        }
+        .notification {
+            position: static;
+            left: 42%; 
+            background-color: #fff;
+            padding: 15px;
+            /*width: 150px;*/
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+    </style>
+</body>
+</html>

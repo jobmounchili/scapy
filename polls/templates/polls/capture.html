@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Capture</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+        <div id="close">
+            <center><p class="notification">{{message}}</p></center>
+        </div>
+        <script>
+            setTimeout(()=>{
+                let doc = document.querySelector("#close")
+                doc.innerHTML = ""
+            },5000)
+        </script>
+        {% endfor %}
+    {% endif %}
+    <ul>
+        <li><a href="{% url 'index' %}">Demande Capture</a></li>
+        <li><a href="{% url 'fcapture' %}">Liste Demandes</a></li>
+        <li><a href="{% url 'acapture' %}">Liste Captures</a></li>
+    </ul>
+    <center><h1>Liste des captures</h1></center>
+    {% for i in all_cap %}
+    <div>
+        <h3>Nom : {{i.nom}}</h3>
+        <p>Date capture : {{i.date}}</p>
+        <p>{{i.data}}</p>
+        {% if request.user.is_superuser %}
+        <form action="" method="POST">{% csrf_token %}<button type="submit" name="sup_capture" value="{{i.id}}">Supprimer</button></form>
+        {% endif %}
+    </div>
+    <br>
+    {% endfor %}
+    <style>
+        .notification {
+            position: static;
+            left: 42%; 
+            background-color: #fff;
+            padding: 15px;
+            /*width: 150px;*/
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+    </style>
+</body>
+</html>
