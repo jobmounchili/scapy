@@ -21,7 +21,10 @@ $ pip3 install gunicorn
 
 ## Déploiement de l'application
 Pour déployer notre application, vous allez :
-1. Transférez vos fichiers de code source Django sur le serveur, par exemple, en utilisant SCP, FTP ou Git.
+1. Transférez vos fichiers de code source Django sur le serveur, par exemple, en utilisant SCP, FTP ou Git:
+```
+https://github.com/jobmounchili/scapy.git
+```
 2. Installer les dépendances requises avec la commande:
 ```
 $ sudo pip3 install -r requirements.txt
