@@ -10,10 +10,6 @@ from scapy.all import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-# Create your views here.
-
-# user = User.objects.create_user(username="jean",password="azerty456")
-# user.save()
 
 def connexion(request):
     connect = Connexion()
