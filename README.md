@@ -41,7 +41,7 @@ $ sudo python3 manage.py collectstatic
 ## Exécution de l'application
 Utiliser un gestionnaire de processus pour exécuter votre application Django avec Gunicorn : 
 ```
-$ sudo gunicorn mysite.wsgi:application
+$ sudo gunicorn mysite.wsgi:application 0.0.0.0:8000
 ```
 ***
 ### Important
