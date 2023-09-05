@@ -3,6 +3,7 @@ from scapy.all import *
 from scapy.config import conf
 from django.contrib.auth.models import User
 
+# Lister les interfaces
 for i in User.objects.all():
     print(i.id)
 list_iface = []
