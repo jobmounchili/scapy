@@ -92,6 +92,7 @@ def interface_capture(request):
                 query1 = DemandeCapture.objects.get(id_dc=dc_id)
                 # Changer l'état de la demande de capture
                 query1.etat = 0
+                query1.id = User.objects.get(username=request.user)
                 query1.save()
                 messages.success(request,'Demande de capture annulée✅')
             elif request.POST.get("sup_capture"):
